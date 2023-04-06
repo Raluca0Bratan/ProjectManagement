@@ -6,9 +6,9 @@ namespace ProjectManagement.DataAccess.Model
         string Name { get; set; }   
         string Email { get; set; }  
         string Password { get; set; }
-        string Address { get; set; }   
-        string Description { get; set; }
-        string ProfilePicturePath { get; set; } 
+        string? Address { get; set; }   
+        string? Description { get; set; }
+        string? ProfilePicturePath { get; set; } 
         string Role { get; }   
 
     }

@@ -11,9 +11,11 @@ namespace ProjectManagement.DataAccess.Model
 
         public Teacher Teacher { get; set;}
 
-        public ICollection<StudentDiscipline> StudentDisciplines { get; set; }
+        public ICollection<StudentDiscipline>? StudentDisciplines { get; set; }
 
-        public ICollection<Project> Projects { get; set; }
+        public ICollection<Project>? Projects { get; set; }
+
+        public ICollection<Question>? Questions { get; set; }
 
     }
 }

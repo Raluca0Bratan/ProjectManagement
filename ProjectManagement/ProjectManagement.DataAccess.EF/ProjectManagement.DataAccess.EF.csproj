@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ProjectManagement.DataAccess.Abstractions\ProjectManagement.DataAccess.Abstractions.csproj" />
     <ProjectReference Include="..\ProjectManagement.DataAccess.Model\ProjectManagement.DataAccess.Model.csproj" />
   </ItemGroup>
 

@@ -12,10 +12,10 @@ namespace ProjectManagement.DataAccess.Model
 
         public Student Student { get; set;}
 
-        public Guid ProjectId { get; set; }
+        public Guid DisciplineId { get; set; }
 
-        public Project Project { get; set; }
+        public Discipline Discipline { get; set; }
 
-        public Answer Answer { get; set; }
+        public Answer? Answer { get; set; }
     }
 }
