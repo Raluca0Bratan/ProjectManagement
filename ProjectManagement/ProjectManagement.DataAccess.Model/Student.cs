@@ -10,10 +10,10 @@ namespace ProjectManagement.DataAccess.Model
         public string Description { get ; set; }
         public string ProfilePicturePath { get ; set ; }
         public string Role => "Student";
-        public List<StudentDiscipline> StudentDiscipline { get; set; }
-        public List<StudentProject> StudentProjects { get; set; }
+        public ICollection<StudentDiscipline> StudentDisciplines { get; set; }
+        public ICollection<StudentProject> StudentProjects { get; set; }
 
-        public List<Question> Questions { get; set; }
+        public ICollection<Question> Questions { get; set; }
 
     }
 }

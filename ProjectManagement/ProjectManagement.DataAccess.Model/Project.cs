@@ -11,13 +11,13 @@ namespace ProjectManagement.DataAccess.Model
         public Guid DisciplineId { get; set; }
         public Discipline Discipline { get; set; }  
 
-        public List<StudentProject> StudentProjects { get; set; }
+        public ICollection<StudentProject> StudentProjects { get; set; }
 
         public Guid TeacherId { get; set; }
 
         public Teacher Teacher { get; set;}
 
-        public List<Question > Questions { get; set; }  
+        public ICollection<Question> Questions { get; set; }  
 
     }
 }

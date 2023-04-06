@@ -11,9 +11,9 @@ namespace ProjectManagement.DataAccess.Model
 
         public Teacher Teacher { get; set;}
 
-        public List<StudentDiscipline> StudentDiscipline { get; set; }
+        public ICollection<StudentDiscipline> StudentDisciplines { get; set; }
 
-        public List<Project> Projects { get; set; }
+        public ICollection<Project> Projects { get; set; }
 
     }
 }
