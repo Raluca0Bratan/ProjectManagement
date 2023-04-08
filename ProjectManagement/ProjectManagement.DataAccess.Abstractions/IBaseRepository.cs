@@ -9,5 +9,6 @@ namespace ProjectManagement.DataAccess.Abstractions
         T Add(T entity);
         T Update(T entity);
         void Remove(Guid entityId);  
+        T GetById(T entityId);
     }
 }
