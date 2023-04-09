@@ -1,5 +1,7 @@
 ﻿
 
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace ProjectManagement.DataAccess.Model
 {
     public class Project:ModelEntity
