@@ -16,6 +16,7 @@ namespace ProjectManagement.DataAccess.Model
 
         public Discipline Discipline { get; set; }
 
+        public Guid AnswerId { get; set; }
         public Answer? Answer { get; set; }
     }
 }

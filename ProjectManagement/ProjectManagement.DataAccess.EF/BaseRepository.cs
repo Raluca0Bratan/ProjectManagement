@@ -8,21 +8,21 @@ namespace ProjectManagement.DataAccess.EF
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : ModelEntity
     {
-        private readonly DbContext context;    
-        public BaseRepository(DbContext context) 
+        private readonly DbContext context;
+        public BaseRepository(DbContext context)
         {
-           this.context = context;
-        } 
+            this.context = context;
+        }
         public T Add(T entity)
         {
-            var added = context.Set<T>().Add(entity); 
+            var added = context.Set<T>().Add(entity);
             context.SaveChanges();
             return added.Entity;
         }
 
         public void Remove(Guid entityId)
         {
-            var element = context.Set<T>().First(e=>e.Id==entityId);
+            var element = context.Set<T>().First(e => e.Id == entityId);
             context.Remove(element);
             context.SaveChanges();
         }
@@ -34,14 +34,14 @@ namespace ProjectManagement.DataAccess.EF
 
         public T Update(T toUpdate)
         {
-           var updated = context.Set<T>().Update(toUpdate);
-           context.SaveChanges();
-           return updated.Entity;
+            var updated = context.Set<T>().Update(toUpdate);
+            context.SaveChanges();
+            return updated.Entity;
         }
 
         public T GetById(Guid id)
         {
-            return context.Set<T>().FirstOrDefault(t => t.Id==id);
+            return context.Set<T>().FirstOrDefault(t => t.Id == id);
         }
 
     }

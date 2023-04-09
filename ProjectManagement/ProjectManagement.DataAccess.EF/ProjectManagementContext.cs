@@ -48,6 +48,11 @@ namespace ProjectManagement.DataAccess.EF
                 .HasOne(sp => sp.Project)
                 .WithMany(s => s.StudentProjects)
                 .HasForeignKey(sp => sp.ProjectId);
+
+            modelBuilder.Entity<Question>()
+                .HasOne(q => q.Answer)
+                .WithOne(a => a.Question)
+                .HasForeignKey<Answer>(a => a.QuestionId);
         }
 
 
