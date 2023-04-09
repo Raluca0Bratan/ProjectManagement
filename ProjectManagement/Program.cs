@@ -1,4 +1,15 @@
+using Microsoft.EntityFrameworkCore;
+using ProjectManagement.DataAccess.Abstractions;
+using ProjectManagement.DataAccess.EF;
+using ProjectManagement.Logic;
+
+
+
 var builder = WebApplication.CreateBuilder(args);
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<DbContext, ProjectManagementContext>(options => options.UseSqlServer(connectionString));
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
