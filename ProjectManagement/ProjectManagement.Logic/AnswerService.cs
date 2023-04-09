@@ -18,10 +18,10 @@ namespace ProjectManagement.Logic
         public void AddAnswer(Answer answer)
         {
             answerRepository.Add(answer);
-            answerRepository.SaveChanges();
+            
         }
 
-        public Answer GetAnswerById(int answerId)
+        public Answer GetAnswerById(Guid answerId)
         {
             var answer = answerRepository.GetById(answerId);
             if (answer != null)
@@ -36,26 +36,15 @@ namespace ProjectManagement.Logic
 
         public void UpdateAnswer(Answer updatedAnswer)
         {
-            var answer = answerRepository.GetById(updatedAnswer.Id);
-            if (answer != null)
-            {
-                answer.Title = updatedAnswer.Title;
-                answer.Description = updatedAnswer.Description;
-                answerRepository.SaveChanges();
-            }
-            else
-            {
-                throw new ArgumentException($"Answer with id {updatedAnswer.Id} does not exist.");
-            }
+            answerRepository.Update(updatedAnswer); 
         }
 
-        public void RemoveAnswer(int answerId)
+        public void RemoveAnswer(Guid answerId)
         {
             var answer = answerRepository.GetById(answerId);
             if (answer != null)
             {
-                answerRepository.Remove(answer);
-                answerRepository.SaveChanges();
+                answerRepository.Remove(answerId);
             }
             else
             {

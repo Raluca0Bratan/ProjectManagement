@@ -20,10 +20,10 @@ namespace ProjectManagement.Logic
         public void AddTeacher(Teacher teacher)
         {
             teacherRepository.Add(teacher);
-            teacherRepository.SaveChanges();
+            
         }
 
-        public Teacher GetTeacherById(int teacherId)
+        public Teacher GetTeacherById(Guid teacherId)
         {
             var teacher = teacherRepository.GetById(teacherId);
             if (teacher != null)
@@ -38,26 +38,15 @@ namespace ProjectManagement.Logic
 
         public void UpdateTeacher(Teacher updatedTeacher)
         {
-            var teacher = teacherRepository.GetById(updatedTeacher.Id);
-            if (teacher != null)
-            {
-                teacher.Title = updatedTeacher.Title;
-                teacher.Description = updatedTeacher.Description;
-                teacherRepository.SaveChanges();
-            }
-            else
-            {
-                throw new ArgumentException($"Teacher with id {updatedTeacher.Id} does not exist.");
-            }
+            teacherRepository.Update(updatedTeacher);   
         }
 
-        public void RemoveTeacher(int teacherId)
+        public void RemoveTeacher(Guid teacherId)
         {
             var teacher = teacherRepository.GetById(teacherId);
             if (teacher != null)
             {
-                teacherRepository.Remove(teacher);
-                teacherRepository.SaveChanges();
+                teacherRepository.Remove(teacherId);
             }
             else
             {

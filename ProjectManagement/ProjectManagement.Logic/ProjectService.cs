@@ -20,10 +20,10 @@ namespace ProjectManagement.Logic
         public void AddProject(Project project)
         {
             projectRepository.Add(project);
-            projectRepository.SaveChanges();
+            
         }
 
-        public Project GetProjectById(int projectId)
+        public Project GetProjectById(Guid projectId)
         {
             var project = projectRepository.GetById(projectId);
             if (project != null)
@@ -38,26 +38,16 @@ namespace ProjectManagement.Logic
 
         public void UpdateProject(Project updatedProject)
         {
-            var project = projectRepository.GetById(updatedProject.Id);
-            if (project != null)
-            {
-                project.Title = updatedProject.Title;
-                project.Description = updatedProject.Description;
-                projectRepository.SaveChanges();
-            }
-            else
-            {
-                throw new ArgumentException($"Project with id {updatedProject.Id} does not exist.");
-            }
+            projectRepository.Update(updatedProject);
         }
 
-        public void RemoveProject(int projectId)
+        public void RemoveProject(Guid projectId)
         {
             var project = projectRepository.GetById(projectId);
             if (project != null)
             {
-                projectRepository.Remove(project);
-                projectRepository.SaveChanges();
+                projectRepository.Remove(projectId);
+                
             }
             else
             {

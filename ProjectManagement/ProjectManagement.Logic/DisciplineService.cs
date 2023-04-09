@@ -19,10 +19,10 @@ namespace ProjectManagement.Logic
         public void AddDiscipline(Discipline discipline)
         {
             disciplineRepository.Add(discipline);
-            disciplineRepository.SaveChanges();
+            
         }
 
-        public Discipline GetDisciplineById(int disciplineId)
+        public Discipline GetDisciplineById(Guid disciplineId)
         {
             var discipline = disciplineRepository.GetById(disciplineId);
             if (discipline != null)
@@ -37,26 +37,15 @@ namespace ProjectManagement.Logic
 
         public void UpdateDisciline(Discipline updatedDiscipline)
         {
-            var discipline = disicplineRepository.GetById(updatedDiscipline.Id);
-            if (discipline != null)
-            {
-                discipline.Title = updatedDiscipline.Title;
-                discipline.Description = updatedDiscipline.Description;
-                disciplineRepository.SaveChanges();
-            }
-            else
-            {
-                throw new ArgumentException($"Discipline with id {updatedDiscipline.Id} does not exist.");
-            }
+            disciplineRepository.Update(updatedDiscipline);
         }
 
-        public void RemoveDiscipline(int disciplineId)
+        public void RemoveDiscipline(Guid disciplineId)
         {
             var discipline = disciplineRepository.GetById(disciplineId);
             if (discipline != null)
             {
-                disciplineRepository.Remove(discipline);
-                disciplineRepository.SaveChanges();
+                disciplineRepository.Remove(disciplineId);
             }
             else
             {

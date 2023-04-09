@@ -20,22 +20,21 @@ namespace ProjectManagement.Logic
         public void AddStudent(Student student)
         {
             studentRepository.Add(student);
-            StudentRepository.SaveChanges();
+            
         }
-        public void RemoveStudent(int studentId)
+        public void RemoveStudent(Guid studentId)
         {
             var student = studentRepository.GetById(studentId);
             if (student != null)
             {
-                studentRepository.Remove(student);
-                studentRepository.SaveChanges();
+                studentRepository.Remove(studentId);
             }
             else
             {
                 throw new ArgumentException($"Student with id {studentId} does not exist.");
             }
         }
-        public Student GetStudentById(int studentId)
+        public Student GetStudentById(Guid studentId)
         {
             var student = studentRepository.GetById(studentId);
             if (student != null)
@@ -49,17 +48,7 @@ namespace ProjectManagement.Logic
         }
         public void UpdateStudent(Student updatedStudent)
         {
-            var student = studentRepository.GetById(updatedStudent.Id);
-            if (student != null)
-            {
-                student.Title = updatedStudent.Title;
-                student.Description = updatedStudent.Description;
-                studentRepository.SaveChanges();
-            }
-            else
-            {
-                throw new ArgumentException($"Student with id {updatedStudent.Id} does not exist.");
-            }
+           studentRepository.Update(updatedStudent);    
         }
 
     }

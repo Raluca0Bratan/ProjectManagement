@@ -22,7 +22,7 @@ namespace ProjectManagement.DataAccess.EF
 
         public void Remove(Guid entityId)
         {
-            var element = context.Set<T>().FirstOrDefault(e=>e.Id==entityId);
+            var element = context.Set<T>().First(e=>e.Id==entityId);
             context.Remove(element);
             context.SaveChanges();
         }
@@ -43,5 +43,6 @@ namespace ProjectManagement.DataAccess.EF
         {
             return context.Set<T>().FirstOrDefault(t => t.Id==id);
         }
+
     }
 }

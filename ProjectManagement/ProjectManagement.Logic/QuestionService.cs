@@ -20,22 +20,21 @@ namespace ProjectManagement.Logic
         public void AddQuestion(Question question)
         {
             questionRepository.Add(question);
-            questionRepository.SaveChanges();
         }
-        public void RemoveQuestion(int questionId)
+        public void RemoveQuestion(Guid questionId)
         {
             var question = questionRepository.GetById(questionId);
             if (question != null)
             {
-                questionRepository.Remove(question);
-                questionRepository.SaveChanges();
+                questionRepository.Remove(questionId);
+              
             }
             else
             {
                 throw new ArgumentException($"Question with id {questionId} does not exist.");
             }
         }
-        public Question GetQuestionById(int questionId)
+        public Question GetQuestionById(Guid questionId)
         {
             var question = questionRepository.GetById(questionId);
             if (question != null)
@@ -49,17 +48,7 @@ namespace ProjectManagement.Logic
         }
         public void UpdateQuestion(Question updatedQuestion)
         {
-            var question = questionRepository.GetById(updatedQuestion.Id);
-            if (question != null)
-            {
-                question.Title = updatedQuestion.Title;
-                question.Description = updatedQuestion.Description;
-                questionRepository.SaveChanges();
-            }
-            else
-            {
-                throw new ArgumentException($"Question with id {updatedQuestion.Id} does not exist.");
-            }
+           questionRepository.Update(updatedQuestion);
         }
 
     }
