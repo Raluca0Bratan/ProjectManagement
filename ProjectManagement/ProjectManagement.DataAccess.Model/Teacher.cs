@@ -4,10 +4,10 @@ namespace ProjectManagement.DataAccess.Model
 {
     public class Teacher : User
     {
-        ICollection<Discipline>? Disciplines { get; set ; }
-        ICollection<Project>? Projects { get; set ; }
+        public ICollection<Discipline>? Disciplines { get; set ; }
+        public ICollection<Project>? Projects { get; set ; }
 
-        ICollection<Answer>? Answers { get; set ; }
+        public ICollection<Answer>? Answers { get; set ; }
 
 
     }

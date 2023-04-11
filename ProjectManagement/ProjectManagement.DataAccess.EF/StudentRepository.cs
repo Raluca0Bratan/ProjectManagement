@@ -11,5 +11,7 @@ namespace ProjectManagement.DataAccess.EF
         public StudentRepository(DbContext context) : base(context)
         {
         }
+
+        
     }
 }
