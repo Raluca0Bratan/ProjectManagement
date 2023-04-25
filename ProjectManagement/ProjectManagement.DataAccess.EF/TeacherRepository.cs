@@ -1,7 +1,6 @@
 ﻿
 
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
 using ProjectManagement.DataAccess.Abstractions;
 using ProjectManagement.DataAccess.Model;
 
@@ -78,10 +77,37 @@ namespace ProjectManagement.DataAccess.EF
             return this.context.Set<Project>().FirstOrDefault(p=>p.Id==projectId); 
         }
 
-        //public List<Student> GetStudentsOfProject(Guid projectId)
-        //{
-        //    var project = GetProjectById(projectId);
-        //    project.StudentProjects
-        //}
+        public List<Student> GetStudentsOfProject(Guid projectId)
+        {
+            var project = GetProjectById(projectId);
+            var studentsOfProject = project.StudentProjects
+                .Select(sp=>sp.Student)
+                .ToList();
+            return studentsOfProject;
+
+        }
+
+        public List<Student> GetStudentsOfDiscipline(Guid disciplineId)
+        {
+            var discipline = GetDisciplineById(disciplineId);
+            var studentsOfDiscipline = discipline.StudentDisciplines
+                .Select(sd => sd.Student)
+                .ToList();
+            return studentsOfDiscipline;
+        }
+
+        public Answer GetAnswerOfQuestion(Guid questionId)
+        {
+            var question = context.Set<Question>().First(q=>q.Id==questionId);
+            var answer = question.Answer;
+            return answer;
+        }
+
+        public IEnumerable<Project> GetProjectsOfDiscipline(Guid disciplineId)
+        {
+            var discipline = GetDisciplineById(disciplineId);
+            return discipline.Projects;
+           
+        }
     }
 }
