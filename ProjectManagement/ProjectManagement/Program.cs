@@ -12,21 +12,6 @@ builder.Services.AddDbContext<DbContext, ProjectManagementContext>(options =>
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddScoped<IAdministratorRepository, AdministratorRepository>();
-//builder.Services.AddScoped<AdministratorService>();
-
-builder.Services.AddScoped<IAnswerRepository, AnswerRepository>();
-builder.Services.AddScoped<AnswerService>();
-
-builder.Services.AddScoped<IDisciplineRepository, DisciplineRepository>();
-builder.Services.AddScoped<DisciplineService>();
-
-builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
-builder.Services.AddScoped<ProjectService>();
-
-builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
-builder.Services.AddScoped<QuestionService>();
-
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 builder.Services.AddScoped<StudentService>();
 
