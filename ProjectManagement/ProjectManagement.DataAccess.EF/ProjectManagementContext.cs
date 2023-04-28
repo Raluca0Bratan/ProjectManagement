@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using ProjectManagement.DataAccess.Model;
 
 namespace ProjectManagement.DataAccess.EF
 {
-    public class ProjectManagementContext:DbContext
+    public class ProjectManagementContext: IdentityDbContext<IdentityUser>
     {
         public ProjectManagementContext(DbContextOptions<ProjectManagementContext> options)
             : base(options) { }  
