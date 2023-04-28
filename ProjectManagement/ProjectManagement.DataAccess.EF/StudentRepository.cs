@@ -37,8 +37,9 @@ namespace ProjectManagement.DataAccess.EF
         }
         public IEnumerable<Question> GetQuestionsOfDiscipline(Guid disciplineId)
         {
-            var discipline = this.context.Set<Discipline>().First(d=>d.Id == disciplineId); 
-            return discipline.Questions;    
+            var discipline = this.context.Set<Discipline>().First(d => d.Id == disciplineId);
+            return discipline.Questions;
         }
+
     }
 }
