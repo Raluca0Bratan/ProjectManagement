@@ -5,7 +5,6 @@ namespace ProjectManagement.DataAccess.Model
     {
         public ICollection<StudentDiscipline>? StudentDisciplines { get; set; }
         public ICollection<StudentProject>? StudentProjects { get; set; }
-
         public ICollection<Question>? Questions { get; set; }
 
     }
