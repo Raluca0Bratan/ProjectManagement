@@ -3,8 +3,7 @@
 using Microsoft.EntityFrameworkCore;
 using ProjectManagement.DataAccess.Abstractions;
 using ProjectManagement.DataAccess.Model;
-using System;
-using System.Collections.Generic;
+
 
 namespace ProjectManagement.DataAccess.EF
 {
@@ -17,25 +16,26 @@ namespace ProjectManagement.DataAccess.EF
 
         public Student GetStudentById(Guid studentId)
         {
-            var student = this.context.Set<Student>().FirstOrDefault(s=>s.StudentId == studentId);    
+            var student = this.context.Set<Student>().FirstOrDefault(s=>s.Id == studentId);    
             return student;
         }
         
-        public List<Disciplines> GetDisciplinesOfStudent (Guid studentId)
+        public List<Discipline> GetDisciplinesOfStudent (Guid studentId)
         {
             var student = GetStudentById(studentId);
-            return student.Disciplines;
+            var disciplines = student.StudentDisciplines.Select(sd=>sd.Discipline).ToList();
+            return disciplines;
         }
-        public List<Projects> GetProjectsOfStudentOfDiscipline(Guid studentId,Guid disciplineId)
+        public List<Project> GetProjectsOfStudentOfDiscipline(Guid studentId,Guid disciplineId)
         {
             var student = GetStudentById(studentId);
-            var studentProjects = student.Projects;
+            var studentProjects = student.StudentProjects.Select(sp=>sp.Project).ToList();
             var studentProjectsOfDiscipline = studentProjects
-                .Select(sp=>sp.Discipline.Id == disciplineId)
+                .Where(sp=>sp.Discipline.Id == disciplineId)
                 .ToList();
             return studentProjectsOfDiscipline;
         }
-        public List<Question> GetQuestionsOfDiscipline(Guid disciplineId)
+        public IEnumerable<Question> GetQuestionsOfDiscipline(Guid disciplineId)
         {
             var discipline = this.context.Set<Discipline>().First(d=>d.Id == disciplineId); 
             return discipline.Questions;    
