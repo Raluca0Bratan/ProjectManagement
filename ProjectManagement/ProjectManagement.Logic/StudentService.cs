@@ -51,5 +51,18 @@ namespace ProjectManagement.Logic
            studentRepository.Update(updatedStudent);    
         }
 
+        public List<Discipline> GetDisciplinesOfStudent(Guid studentId)
+        {
+           return studentRepository.GetDisciplinesOfStudent(studentId);
+        }
+        public List<Project> GetProjectsOfStudentOfDiscipline(Guid studentId, Guid disciplineId)
+        {
+          return  studentRepository.GetProjectsOfStudentOfDiscipline(studentId, disciplineId);
+        }
+        public IEnumerable<Question> GetQuestionsOfDiscipline(Guid disciplineId)
+        {
+           return studentRepository.GetQuestionsOfDiscipline(disciplineId);
+        }
+
     }
 }
