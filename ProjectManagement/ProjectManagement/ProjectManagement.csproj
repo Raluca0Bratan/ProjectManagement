@@ -24,6 +24,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ProjectManagement.DataAccess.EF\ProjectManagement.DataAccess.EF.csproj" />
     <ProjectReference Include="..\ProjectManagement.Logic\ProjectManagement.Logic.csproj" />
+	<ProjectReference Include="..\ProjectManagement.DataAccess.Model\ProjectManagement.DataAccess.Model.csproj" />
   </ItemGroup>
 
 </Project>

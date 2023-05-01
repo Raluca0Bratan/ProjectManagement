@@ -1,83 +1,67 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿
 using Microsoft.AspNetCore.Mvc;
+using ProjectManagement.DataAccess.Model;
+using ProjectManagement.Logic;
 
 namespace ProjectManagement.Controllers
 {
     public class TeacherController : Controller
     {
+        private readonly TeacherService teacherService;
+
+        public TeacherController(TeacherService teacherService)
+        {
+            this.teacherService = teacherService;
+        }
         // GET: TeacherController
-        public ActionResult Index()
+
+        [HttpGet]
+        public IActionResult Index()
         {
-            return View();
+            var teachers = teacherService.GetTeachers();
+            return View(teachers);
         }
 
-        // GET: TeacherController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: TeacherController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: TeacherController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public IActionResult Create(Teacher teacher)
         {
-            try
+            if (ModelState.IsValid)
             {
+                teacherService.AddTeacher(teacher);
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+
+            return View(teacher);
         }
 
-        // GET: TeacherController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: TeacherController/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public IActionResult Edit(Teacher teacher)
         {
-            try
+            if (ModelState.IsValid)
             {
+                teacherService.UpdateTeacher(teacher);
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+
+            return View(teacher);
         }
 
-        // GET: TeacherController/Delete/5
-        public ActionResult Delete(int id)
+        [HttpDelete]
+        public IActionResult DeleteConfirmed(Guid id)
         {
-            return View();
+            teacherService.RemoveTeacher(id);
+            return RedirectToAction(nameof(Index));
         }
 
-        // POST: TeacherController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        [HttpGet]
+        public IActionResult Details(Guid id)
         {
-            try
+            var student = teacherService.GetTeacherById(id);
+            if (student == null)
             {
-                return RedirectToAction(nameof(Index));
+                return NotFound();
             }
-            catch
-            {
-                return View();
-            }
+            return View(student);
         }
     }
 }
