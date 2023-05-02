@@ -2,6 +2,10 @@ using Microsoft.EntityFrameworkCore;
 using ProjectManagement.DataAccess.Abstractions;
 using ProjectManagement.DataAccess.EF;
 using ProjectManagement.Logic;
+using Microsoft.AspNetCore.Identity;
+using System.Configuration;
+using System;
+using ProjectManagement.DataAccess.Model;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +21,24 @@ builder.Services.AddScoped<StudentService>();
 
 builder.Services.AddScoped<ITeacherRepository, TeacherRepository>();
 builder.Services.AddScoped<TeacherService>();
+
+builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<ProjectManagementContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<ProjectManagementContext>().AddDefaultTokenProviders();
+builder.Services.Configure<IdentityOptions>(opt => {
+    opt.Password.RequiredLength = 6;
+    opt.Password.RequireNonAlphanumeric = false;
+    opt.Password.RequireDigit = true;
+    opt.Password.RequireLowercase = true;
+    opt.Password.RequireUppercase = false;
+    opt.User.RequireUniqueEmail = true;
+    opt.Lockout.MaxFailedAccessAttempts = 3;
+    opt.Lockout.DefaultLockoutTimeSpan = System.TimeSpan.FromMinutes(10);
+});
+builder.Services.AddHttpContextAccessor();
+builder.Services.ConfigureApplicationCookie(options => {
+    options.LoginPath = "/Auth/SignIn";
+});
 
 var app = builder.Build();
 
@@ -40,3 +62,5 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+
