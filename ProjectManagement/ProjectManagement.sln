@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.5.33502.453
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectManagement", "ProjectManagement\ProjectManagement.csproj", "{80A4513F-D544-4DFE-990D-CB544575D4DE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B778FFA9-62F6-4D08-868E-79C211D89579} = {B778FFA9-62F6-4D08-868E-79C211D89579}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{9A228B3F-0653-4981-BEB0-82505609ADBD}"
 EndProject
