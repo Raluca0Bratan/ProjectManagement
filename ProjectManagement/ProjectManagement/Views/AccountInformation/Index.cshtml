@@ -1,0 +1,33 @@
+﻿@model ProjectManagement.DataAccess.Model.User
+
+<h2>Account Information</h2>
+
+<div>
+    <label>Name:</label>
+    <span>@Model.Name</span>
+</div>
+
+<div>
+    <label>Email:</label>
+    <span>@Model.Email</span>
+</div>
+
+<div>
+    <label>Password:</label>
+    <span>@Model.Password</span>
+</div>
+
+<div>
+    <label>Address:</label>
+    <span>@Model.Address</span>
+</div>
+
+<div>
+    <label>Description:</label>
+    <span>@Model.Description</span>
+</div>
+
+<div>
+    <label>Profile Picture:</label>
+    <img src="@Model.ProfilePicturePath" alt="Profile Picture">
+</div>
