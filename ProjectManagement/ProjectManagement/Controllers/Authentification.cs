@@ -34,14 +34,14 @@ public class AuthController : Controller
         }
         if (user == null)
         {
-            ModelState.AddModelError("", "Login ve ya parol yalnisdir");
+            ModelState.AddModelError("", "Login or password is incorrect");
             return View(signIn);
         }
         var result = await
         _signInManager.PasswordSignInAsync(user, signIn.Password, signIn.RememberMe, true);
         if (!result.Succeeded)
         {
-            ModelState.AddModelError("", "Login ve ya parol yalnisdir");
+            ModelState.AddModelError("", "Login or password is incorrect");
             return View(signIn);
         }
         if (ReturnUrl != null) return LocalRedirect(ReturnUrl);
