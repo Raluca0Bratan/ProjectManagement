@@ -1,5 +1,6 @@
 ﻿
 
+
 namespace ProjectManagement.DataAccess.Model
 {
     public class Teacher : User
