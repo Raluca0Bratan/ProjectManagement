@@ -44,6 +44,26 @@ namespace ProjectManagement.Controllers
             }
             return View(model);
         }
+
+        //public async Task<IActionResult> View()
+        //{
+        //    var user = await userManager.GetUserAsync(User);
+        //    if (user == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    var model = new AccountInfoViewModel
+        //    {
+        //        //Name = user.Name,
+        //        Email = user.Email,
+        //        //Address = user.Address,
+        //        //Description = user.Description,
+        //        //ProfilePicturePath = user.ProfilePicturePath
+        //    };
+
+        //    return View(model);
+        //}
     }
 }
     
