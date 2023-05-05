@@ -3,33 +3,16 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace ProjectManagement.DataAccess.EF.Migrations
+namespace ProjectManagement.Migrations
 {
     /// <inheritdoc />
-    public partial class NewMigration : Migration
+    public partial class Ralu : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Administrators",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ProfilePicturePath = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Administrators", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Students",
+                name: "Users",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -39,39 +22,11 @@ namespace ProjectManagement.DataAccess.EF.Migrations
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProfilePicturePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AdministratorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Students", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Students_Administrators_AdministratorId",
-                        column: x => x.AdministratorId,
-                        principalTable: "Administrators",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Teachers",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ProfilePicturePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AdministratorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Teachers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Teachers_Administrators_AdministratorId",
-                        column: x => x.AdministratorId,
-                        principalTable: "Administrators",
-                        principalColumn: "Id");
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -86,11 +41,11 @@ namespace ProjectManagement.DataAccess.EF.Migrations
                 {
                     table.PrimaryKey("PK_Disciplines", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Disciplines_Teachers_TeacherId",
+                        name: "FK_Disciplines_Users_TeacherId",
                         column: x => x.TeacherId,
-                        principalTable: "Teachers",
+                        principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -113,11 +68,11 @@ namespace ProjectManagement.DataAccess.EF.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Projects_Teachers_TeacherId",
+                        name: "FK_Projects_Users_TeacherId",
                         column: x => x.TeacherId,
-                        principalTable: "Teachers",
+                        principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -140,11 +95,11 @@ namespace ProjectManagement.DataAccess.EF.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Questions_Students_StudentId",
+                        name: "FK_Questions_Users_StudentId",
                         column: x => x.StudentId,
-                        principalTable: "Students",
+                        principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -164,9 +119,9 @@ namespace ProjectManagement.DataAccess.EF.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_StudentsDisciplines_Students_StudentId",
+                        name: "FK_StudentsDisciplines_Users_StudentId",
                         column: x => x.StudentId,
-                        principalTable: "Students",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -188,9 +143,9 @@ namespace ProjectManagement.DataAccess.EF.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_StudentProjects_Students_StudentId",
+                        name: "FK_StudentProjects_Users_StudentId",
                         column: x => x.StudentId,
-                        principalTable: "Students",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -214,9 +169,9 @@ namespace ProjectManagement.DataAccess.EF.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Answers_Teachers_TeacherId",
+                        name: "FK_Answers_Users_TeacherId",
                         column: x => x.TeacherId,
-                        principalTable: "Teachers",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -263,19 +218,9 @@ namespace ProjectManagement.DataAccess.EF.Migrations
                 column: "ProjectId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Students_AdministratorId",
-                table: "Students",
-                column: "AdministratorId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_StudentsDisciplines_DisciplineId",
                 table: "StudentsDisciplines",
                 column: "DisciplineId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Teachers_AdministratorId",
-                table: "Teachers",
-                column: "AdministratorId");
         }
 
         /// <inheritdoc />
@@ -297,16 +242,10 @@ namespace ProjectManagement.DataAccess.EF.Migrations
                 name: "Projects");
 
             migrationBuilder.DropTable(
-                name: "Students");
-
-            migrationBuilder.DropTable(
                 name: "Disciplines");
 
             migrationBuilder.DropTable(
-                name: "Teachers");
-
-            migrationBuilder.DropTable(
-                name: "Administrators");
+                name: "Users");
         }
     }
 }

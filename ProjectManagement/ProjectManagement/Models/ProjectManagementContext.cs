@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ProjectManagement.DataAccess.Model;
+using System.Data;
 
 namespace ProjectManagement.DataAccess.EF
 {
@@ -55,6 +56,10 @@ namespace ProjectManagement.DataAccess.EF
                 .HasOne(q => q.Answer)
                 .WithOne(a => a.Question)
                 .HasForeignKey<Answer>(a => a.QuestionId);
+
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<User>().ToTable("Users");
+           
         }
 
 

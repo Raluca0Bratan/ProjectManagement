@@ -3,6 +3,7 @@ using ProjectManagement.DataAccess.Abstractions;
 using ProjectManagement.DataAccess.EF;
 using ProjectManagement.Logic;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,9 +26,9 @@ builder.Services.AddScoped<TeacherService>();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<ProjectManagementContext>(); builder.Services.AddDbContext<ProjectManagementContext>(options =>
+    .AddEntityFrameworkStores<ProjectManagementContext>(); 
+builder.Services.AddDbContext<ProjectManagementContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
 builder.Services.Configure<IdentityOptions>(options =>
 {
     // Password settings
