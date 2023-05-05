@@ -57,9 +57,10 @@ namespace ProjectManagement.DataAccess.EF
                 .WithOne(a => a.Question)
                 .HasForeignKey<Answer>(a => a.QuestionId);
 
-            base.OnModelCreating(modelBuilder);
+            
             modelBuilder.Entity<User>().ToTable("Users");
-           
+            base.OnModelCreating(modelBuilder);
+
         }
 
 

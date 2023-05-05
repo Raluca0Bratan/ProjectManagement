@@ -2,47 +2,105 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<html lang="en">
+
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="~/css/signup.css">
-    <title>Document</title>
+    <title>Sign Up</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #F7F7F7;
+        }
+
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .signup-form {
+            width: 100%;
+            max-width: 450px;
+            background-color: #FFF;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+            .signup-form h2 {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+            .signup-form input[type="text"],
+            .signup-form input[type="email"],
+            .signup-form input[type="password"] {
+                width: 100%;
+                padding: 10px;
+                border-radius: 5px;
+                border: none;
+                margin-bottom: 20px;
+                box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            }
+
+            .signup-form button[type="submit"] {
+                background-color: #007ACC;
+                color: #FFF;
+                border: none;
+                padding: 10px;
+                border-radius: 5px;
+                width: 100%;
+                cursor: pointer;
+                transition: background-color 0.3s ease-in-out;
+            }
+
+                .signup-form button[type="submit"]:hover {
+                    background-color: #0062A6;
+                }
+
+            .signup-form a {
+                display: block;
+                text-align: center;
+                margin-top: 20px;
+                color: #007ACC;
+                text-decoration: none;
+            }
+
+                .signup-form a:hover {
+                    text-decoration: underline;
+                }
+    </style>
 </head>
 <body>
-    <div class="content">
-        <a asp-controller="Home" asp-action="Index"></a>
-        <div class="SignUp">
-            <label for="fname"><b>First name</b></label>
-            <label for="lname" style="margin-left: 100px;"><b>Last name</b></label>
-            <br>
-            <input type="text" placeholder="First name" name="fname" required>
-            <input type="text" placeholder="Last name" name="lname" required>
-            <br>
-            <label for="mail"><b>Email</b></label>
-            <br>
-            <input type="email" style="width: 270px;" placeholder="Email" name="mail" required>
-            <br>
-            <label for="psw"><b>Password</b></label>
-            <label for="conpsw" style="margin-left: 110px;"><b>Confirm Password</b></label>
-            <br>
-            <input type="password" placeholder="Password" name="psw" required>
-            <input type="password" placeholder="Confirm Password" name="conpsw" required>
-
-            <div class="center">
-                <button class="btn">
-                    <svg width="100px" height="40px" viewBox="0 0 100 40" class="border">
-                        <polyline points="99,1 99,39 1,39 1,1 99,1" class="bg-line" />
-                        <polyline points="99,1 99,39 1,39 1,1 99,1" class="hl-line" />
-                    </svg>
-                    <span>Sign Up</span>
-                </button>
+    <div class="center">
+        <form class="signup-form" method="post">
+            <h2>Sign Up</h2>
+            <div>
+                <input type="text" placeholder="First Name" name="fname" required>
             </div>
-            @*<h4>Do you already have an account? <a asp-controller="Registration" asp-action="login">Log in</a></h4>*@
-        </div>
+            <div>
+                <input type="text" placeholder="Last Name" name="lname" required>
+            </div>
+            <div>
+                <input type="email" placeholder="Email" name="mail" required>
+            </div>
+            <div>
+                <input type="password" placeholder="Password" name="psw" required>
+            </div>
+            <div>
+                <input type="password" placeholder="Confirm Password" name="conpsw" required>
+            </div>
+            <button type="submit">Sign Up</button>
+            <a asp-controller="Registration" asp-action="login">Already have an account? Log In</a>
+        </form>
     </div>
 </body>
 </html>
