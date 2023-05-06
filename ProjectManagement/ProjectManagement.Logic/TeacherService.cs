@@ -1,6 +1,7 @@
 ﻿using ProjectManagement.DataAccess.Abstractions;
 using ProjectManagement.DataAccess.Model;
 using System;
+using System.Linq.Expressions;
 
 namespace ProjectManagement.Logic
 {
@@ -12,49 +13,7 @@ namespace ProjectManagement.Logic
             this.teacherRepository = teacherRepository;
         }
 
-        public IEnumerable<Teacher> GetTeachers()
-        {
-            return teacherRepository.GetAll();
-        }
-
-        public void AddTeacher(Teacher teacher)
-        {
-            teacherRepository.Add(teacher);
-
-        }
-
-        public Teacher GetTeacherById(Guid teacherId)
-        {
-            var teacher = teacherRepository.GetById(teacherId);
-            if (teacher != null)
-            {
-                return teacher;
-            }
-            else
-            {
-                throw new ArgumentException($"Teacher with id {teacherId} does not exist.");
-            }
-        }
-
-        public void UpdateTeacher(Teacher updatedTeacher)
-        {
-            teacherRepository.Update(updatedTeacher);
-        }
-
-        public void RemoveTeacher(Guid teacherId)
-        {
-            var teacher = teacherRepository.GetById(teacherId);
-            if (teacher != null)
-            {
-                teacherRepository.Remove(teacherId);
-            }
-            else
-            {
-                throw new ArgumentException($"Teacher with id {teacherId} does not exist.");
-            }
-        }
-
-        public Teacher AddDisciplineToTeacher(Guid teacherId, Discipline disciplineToAdd)
+        public Teacher AddDisciplineToTeacher(string teacherId, Discipline disciplineToAdd)
         {
             return teacherRepository.AddDisciplineToTeacher(teacherId, disciplineToAdd);
         }
@@ -65,13 +24,13 @@ namespace ProjectManagement.Logic
             return teacherRepository.UpdateDiscipline(disciplineToUpdate);
         }
 
-        public void RemoveDisciplineFromTeacher(Guid teacherId, Discipline discipline)
+        public void RemoveDisciplineFromTeacher(string teacherId, Discipline discipline)
         {
             teacherRepository.RemoveDisciplineFromTeacher(teacherId, discipline);
         }
 
 
-        public List<Discipline> GetDisciplinesOfTeacher(Guid teacherId)
+        public List<Discipline> GetDisciplinesOfTeacher(string teacherId)
         {
             return teacherRepository.GetDisciplinesOfTeacher(teacherId);
         }
@@ -128,6 +87,31 @@ namespace ProjectManagement.Logic
         public IEnumerable<Project> GetProjectsOfDiscipline(Guid disciplineId)
         {
             return teacherRepository.GetProjectsOfDiscipline(disciplineId);
+        }
+
+        public Teacher AddTeacher(Teacher teacher)
+        {
+            return teacherRepository.Add(teacher);
+        }
+
+        public void RemoveTeacher(Teacher teacher)
+        {
+            teacherRepository.Remove(teacher);
+        }
+
+        public IEnumerable<Teacher> GetAll()
+        {
+            return teacherRepository.GetAll();
+        }
+
+        public Teacher Update(Teacher toUpdate)
+        {
+           return teacherRepository.Update(toUpdate);
+        }
+
+        public IQueryable<Teacher> FindByCondition(Expression<Func<Teacher, bool>> expression)
+        {
+            return teacherRepository.FindByCondition(expression);
         }
 
     }

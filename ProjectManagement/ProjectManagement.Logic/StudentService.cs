@@ -22,21 +22,21 @@ namespace ProjectManagement.Logic
             studentRepository.Add(student);
             
         }
-        public void RemoveStudent(Guid studentId)
+        public void RemoveStudent(string studentId)
         {
-            var student = studentRepository.GetById(studentId);
+            var student = studentRepository.FindByCondition(s=>s.Id==studentId).FirstOrDefault();
             if (student != null)
             {
-                studentRepository.Remove(studentId);
+                studentRepository.Remove(student);
             }
             else
             {
                 throw new ArgumentException($"Student with id {studentId} does not exist.");
             }
         }
-        public Student GetStudentById(Guid studentId)
+        public Student GetStudentById(string studentId)
         {
-            var student = studentRepository.GetById(studentId);
+            var student = studentRepository.FindByCondition(s => s.Id == studentId).FirstOrDefault();
             if (student != null)
             {
                 return student;
@@ -51,11 +51,11 @@ namespace ProjectManagement.Logic
            studentRepository.Update(updatedStudent);    
         }
 
-        public List<Discipline> GetDisciplinesOfStudent(Guid studentId)
+        public List<Discipline> GetDisciplinesOfStudent(string studentId)
         {
            return studentRepository.GetDisciplinesOfStudent(studentId);
         }
-        public List<Project> GetProjectsOfStudentOfDiscipline(Guid studentId, Guid disciplineId)
+        public List<Project> GetProjectsOfStudentOfDiscipline(string studentId, Guid disciplineId)
         {
           return studentRepository.GetProjectsOfStudentOfDiscipline(studentId, disciplineId);
         }

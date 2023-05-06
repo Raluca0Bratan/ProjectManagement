@@ -13,28 +13,28 @@ namespace ProjectManagement.DataAccess.EF
         {
         }
 
-        public Teacher AddDisciplineToTeacher (Guid teacherId, Discipline disciplineToAdd) 
+        public Teacher AddDisciplineToTeacher (string teacherId, Discipline disciplineToAdd) 
         {
-            var teacher = GetById(teacherId);
+            var teacher = FindByCondition(t=>t.Id==teacherId).FirstOrDefault();
             teacher.Disciplines.Add(disciplineToAdd);
             this.context.SaveChanges();
             return teacher;
         }
 
-        public Discipline UpdateDiscipline ( Discipline disciplineToUpdate)
+        public Discipline UpdateDiscipline (Discipline disciplineToUpdate)
         {
             this.context.Set<Discipline>().Update(disciplineToUpdate); 
             this.context.SaveChanges();
             return disciplineToUpdate;
         }
-        public void RemoveDisciplineFromTeacher(Guid teacherId,Discipline discipline) 
+        public void RemoveDisciplineFromTeacher(string teacherId,Discipline discipline) 
         { 
-            var teacher = GetById(teacherId);
+            var teacher = FindByCondition(t => t.Id == teacherId).FirstOrDefault();
             teacher.Disciplines.Remove(discipline);
             this.context.SaveChanges(); 
         }
 
-        public List<Discipline> GetDisciplinesOfTeacher(Guid teacherId)
+        public List<Discipline> GetDisciplinesOfTeacher(string teacherId)
         {
             var disciplines = this.context.Set<Discipline>()
                 .Where(d => d.TeacherId == teacherId)
@@ -109,5 +109,6 @@ namespace ProjectManagement.DataAccess.EF
             return discipline.Projects;
            
         }
+
     }
 }

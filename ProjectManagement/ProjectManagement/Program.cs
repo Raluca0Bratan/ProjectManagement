@@ -3,7 +3,7 @@ using ProjectManagement.DataAccess.Abstractions;
 using ProjectManagement.DataAccess.EF;
 using ProjectManagement.Logic;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Options;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +23,9 @@ builder.Services.AddScoped<StudentService>();
 
 builder.Services.AddScoped<ITeacherRepository, TeacherRepository>();
 builder.Services.AddScoped<TeacherService>();
+
+builder.Services.AddScoped<IUserRepository,UserRepository>();
+builder.Services.AddScoped<UserService>();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()

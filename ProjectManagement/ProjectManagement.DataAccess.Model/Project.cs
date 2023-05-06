@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProjectManagement.DataAccess.Model
 {
-    public class Project:ModelEntity
+    public class Project
     {
-       
+        public Guid Id {  get; set; }
         public string Name { get; set; }    
         public DateTime Deadline { get; set; }
 
@@ -15,7 +15,7 @@ namespace ProjectManagement.DataAccess.Model
 
         public ICollection<StudentProject>? StudentProjects { get; set; }
 
-        public Guid TeacherId { get; set; }
+        public string TeacherId { get; set; }
 
         public Teacher Teacher { get; set;}
 

@@ -3,10 +3,11 @@
 using Microsoft.EntityFrameworkCore;
 using ProjectManagement.DataAccess.Abstractions;
 using ProjectManagement.DataAccess.Model;
+using System.Linq.Expressions;
 
 namespace ProjectManagement.DataAccess.EF
 {
-    public class BaseRepository<T> : IBaseRepository<T> where T : ModelEntity
+    public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
         private readonly DbContext context;
         public BaseRepository(DbContext context)
@@ -20,10 +21,9 @@ namespace ProjectManagement.DataAccess.EF
             return added.Entity;
         }
 
-        public void Remove(Guid entityId)
+        public void Remove(T entity)
         {
-            var element = context.Set<T>().First(e => e.Id == entityId);
-            context.Remove(element);
+            context.Remove(entity);
             context.SaveChanges();
         }
 
@@ -39,9 +39,9 @@ namespace ProjectManagement.DataAccess.EF
             return updated.Entity;
         }
 
-        public T GetById(Guid id)
+        public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression)
         {
-            return context.Set<T>().FirstOrDefault(t => t.Id == id);
+            return this.context.Set<T>().Where(expression).AsNoTracking();
         }
 
     }

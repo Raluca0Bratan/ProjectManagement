@@ -12,8 +12,8 @@ using ProjectManagement.DataAccess.EF;
 namespace ProjectManagement.Migrations
 {
     [DbContext(typeof(ProjectManagementContext))]
-    [Migration("20230505155159_Ralu")]
-    partial class Ralu
+    [Migration("20230506200013_ConfiguringIdentity")]
+    partial class ConfiguringIdentity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -140,6 +140,8 @@ namespace ProjectManagement.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.UseTptMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -236,8 +238,9 @@ namespace ProjectManagement.Migrations
                     b.Property<Guid>("QuestionId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("TeacherId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("TeacherId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Text")
                         .IsRequired()
@@ -263,8 +266,9 @@ namespace ProjectManagement.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("TeacherId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("TeacherId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -289,8 +293,9 @@ namespace ProjectManagement.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("TeacherId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("TeacherId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -313,8 +318,9 @@ namespace ProjectManagement.Migrations
                     b.Property<Guid>("DisciplineId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("StudentId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("StudentId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Text")
                         .IsRequired()
@@ -331,8 +337,8 @@ namespace ProjectManagement.Migrations
 
             modelBuilder.Entity("ProjectManagement.DataAccess.Model.StudentDiscipline", b =>
                 {
-                    b.Property<Guid>("StudentId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("StudentId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<Guid>("DisciplineId")
                         .HasColumnType("uniqueidentifier");
@@ -346,8 +352,8 @@ namespace ProjectManagement.Migrations
 
             modelBuilder.Entity("ProjectManagement.DataAccess.Model.StudentProject", b =>
                 {
-                    b.Property<Guid>("StudentId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("StudentId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<Guid>("ProjectId")
                         .HasColumnType("uniqueidentifier");
@@ -361,9 +367,7 @@ namespace ProjectManagement.Migrations
 
             modelBuilder.Entity("ProjectManagement.DataAccess.Model.User", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
@@ -371,53 +375,35 @@ namespace ProjectManagement.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProfilePicturePath")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
-
                     b.ToTable("Users", (string)null);
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("User");
-
-                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("ProjectManagement.DataAccess.Model.Administrator", b =>
                 {
                     b.HasBaseType("ProjectManagement.DataAccess.Model.User");
 
-                    b.HasDiscriminator().HasValue("Administrator");
+                    b.ToTable("Administrators");
                 });
 
             modelBuilder.Entity("ProjectManagement.DataAccess.Model.Student", b =>
                 {
                     b.HasBaseType("ProjectManagement.DataAccess.Model.User");
 
-                    b.HasDiscriminator().HasValue("Student");
+                    b.ToTable("Students");
                 });
 
             modelBuilder.Entity("ProjectManagement.DataAccess.Model.Teacher", b =>
                 {
                     b.HasBaseType("ProjectManagement.DataAccess.Model.User");
 
-                    b.HasDiscriminator().HasValue("Teacher");
+                    b.ToTable("Teachers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -575,6 +561,42 @@ namespace ProjectManagement.Migrations
                     b.Navigation("Project");
 
                     b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("ProjectManagement.DataAccess.Model.User", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithOne()
+                        .HasForeignKey("ProjectManagement.DataAccess.Model.User", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ProjectManagement.DataAccess.Model.Administrator", b =>
+                {
+                    b.HasOne("ProjectManagement.DataAccess.Model.User", null)
+                        .WithOne()
+                        .HasForeignKey("ProjectManagement.DataAccess.Model.Administrator", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ProjectManagement.DataAccess.Model.Student", b =>
+                {
+                    b.HasOne("ProjectManagement.DataAccess.Model.User", null)
+                        .WithOne()
+                        .HasForeignKey("ProjectManagement.DataAccess.Model.Student", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ProjectManagement.DataAccess.Model.Teacher", b =>
+                {
+                    b.HasOne("ProjectManagement.DataAccess.Model.User", null)
+                        .WithOne()
+                        .HasForeignKey("ProjectManagement.DataAccess.Model.Teacher", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ProjectManagement.DataAccess.Model.Discipline", b =>
