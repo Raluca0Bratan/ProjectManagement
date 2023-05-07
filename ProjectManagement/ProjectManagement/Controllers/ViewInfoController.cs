@@ -11,9 +11,9 @@ namespace ProjectManagement.Controllers
         {
             this.teacherService = teacherService;
         }
-        public IActionResult Index(Guid userId)
+        public IActionResult Index(string userId)
         {
-            var user = teacherService.GetTeacherById(userId);
+            var user = teacherService.FindByCondition(u=>u.Id==userId);
             return View(user);
 
         }
