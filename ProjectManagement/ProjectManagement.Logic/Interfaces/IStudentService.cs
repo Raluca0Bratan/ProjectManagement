@@ -21,6 +21,10 @@ namespace ProjectManagement.Logic.Interfaces
         public List<Project> GetProjectsOfStudentOfDiscipline(string studentId, Guid disciplineId);
 
         public IEnumerable<Question> GetQuestionsOfDiscipline(Guid disciplineId);
-       
+
+        public Project AddProjectToStudent(Project project, string studentId);
+
+        public Discipline AddDisciplineToStudent(Discipline discipline, string studentId);
+
     }
 }

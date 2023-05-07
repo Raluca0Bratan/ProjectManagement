@@ -1,0 +1,29 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model ProjectViewModel
+
+<h2>Create Project</h2>
+
+@using (Html.BeginForm("CreateProject", "Student", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+@*
+    <div class="form-group">
+        @Html.LabelFor(m => m.Description)
+        @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Description)
+    </div>*@
+
+    <!-- Add more input fields for other project properties as needed -->
+
+    <button type="submit" class="btn btn-primary">Create</button>
+}
