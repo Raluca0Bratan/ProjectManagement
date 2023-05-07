@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.5.33502.453
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectManagement", "ProjectManagement\ProjectManagement.csproj", "{80A4513F-D544-4DFE-990D-CB544575D4DE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B778FFA9-62F6-4D08-868E-79C211D89579} = {B778FFA9-62F6-4D08-868E-79C211D89579}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{9A228B3F-0653-4981-BEB0-82505609ADBD}"
 EndProject
@@ -20,6 +23,15 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectManagement.Logic", "ProjectManagement.Logic\ProjectManagement.Logic.csproj", "{408987D0-9C8A-49CD-8688-A816FEB2DCE2}"
 	ProjectSection(ProjectDependencies) = postProject
 		{A9741F78-917B-446C-8A58-91F2C79775E5} = {A9741F78-917B-446C-8A58-91F2C79775E5}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectManagement.Test", "ProjectManagement.Test\ProjectManagement.Test.csproj", "{AD5AFB3A-0B03-47A0-9C84-CA40BE72B5E8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{00A163F4-BB9A-470E-A130-AB50F27ADBEB} = {00A163F4-BB9A-470E-A130-AB50F27ADBEB}
+		{408987D0-9C8A-49CD-8688-A816FEB2DCE2} = {408987D0-9C8A-49CD-8688-A816FEB2DCE2}
+		{80A4513F-D544-4DFE-990D-CB544575D4DE} = {80A4513F-D544-4DFE-990D-CB544575D4DE}
+		{A9741F78-917B-446C-8A58-91F2C79775E5} = {A9741F78-917B-446C-8A58-91F2C79775E5}
+		{B778FFA9-62F6-4D08-868E-79C211D89579} = {B778FFA9-62F6-4D08-868E-79C211D89579}
 	EndProjectSection
 EndProject
 Global
@@ -48,6 +60,10 @@ Global
 		{408987D0-9C8A-49CD-8688-A816FEB2DCE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{408987D0-9C8A-49CD-8688-A816FEB2DCE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{408987D0-9C8A-49CD-8688-A816FEB2DCE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD5AFB3A-0B03-47A0-9C84-CA40BE72B5E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD5AFB3A-0B03-47A0-9C84-CA40BE72B5E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD5AFB3A-0B03-47A0-9C84-CA40BE72B5E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD5AFB3A-0B03-47A0-9C84-CA40BE72B5E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

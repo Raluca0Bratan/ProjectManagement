@@ -9,24 +9,24 @@ namespace ProjectManagement.DataAccess.EF
 {
     public class StudentRepository : BaseRepository<Student>, IStudentRepository
     {
-        private readonly DbContext context; 
-        public StudentRepository(DbContext context) : base(context)
+        private readonly ProjectManagementContext context; 
+        public StudentRepository(ProjectManagementContext context) : base(context)
         {
         }
 
-        public Student GetStudentById(Guid studentId)
+        public Student GetStudentById(string studentId)
         {
             var student = this.context.Set<Student>().FirstOrDefault(s => s.Id == studentId);
             return student;
         }
-
-        public List<Discipline> GetDisciplinesOfStudent(Guid studentId)
+        
+        public List<Discipline> GetDisciplinesOfStudent (string studentId)
         {
             var student = GetStudentById(studentId);
             var disciplines = student.StudentDisciplines.Select(sd => sd.Discipline).ToList();
             return disciplines;
         }
-        public List<Project> GetProjectsOfStudentOfDiscipline(Guid studentId, Guid disciplineId)
+        public List<Project> GetProjectsOfStudentOfDiscipline(string studentId,Guid disciplineId)
         {
             var student = GetStudentById(studentId);
             var studentProjects = student.StudentProjects.Select(sp => sp.Project).ToList();

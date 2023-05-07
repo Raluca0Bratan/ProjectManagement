@@ -1,14 +1,16 @@
 ﻿
-using ProjectManagement.DataAccess.Model;
+
+using System.Linq.Expressions;
 
 namespace ProjectManagement.DataAccess.Abstractions
 {
-    public interface IBaseRepository<T> where T : ModelEntity
+    public interface IBaseRepository<T> where T : class
     {
         IEnumerable<T> GetAll();
         T Add(T entity);
         T Update(T entity);
-        void Remove(Guid entityId);  
-        T GetById(Guid entityId);
+        void Remove(T entity);
+        public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression);
+       
     }
 }
