@@ -2,12 +2,13 @@
 
 namespace ProjectManagement.DataAccess.Model
 {
-    public class Discipline:ModelEntity
+    public class Discipline
     {
        
+        public Guid Id { get; set; }    
         public string Name { get; set; }
 
-        public Guid TeacherId { get; set; } 
+        public string TeacherId { get; set; } 
 
         public Teacher Teacher { get; set;}
 

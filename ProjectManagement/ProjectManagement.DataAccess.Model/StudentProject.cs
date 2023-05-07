@@ -4,7 +4,7 @@ namespace ProjectManagement.DataAccess.Model
 {
     public class StudentProject
     {
-        public Guid StudentId { get; set; }
+        public string StudentId { get; set; }
         public Guid ProjectId { get; set; }
 
         public Student Student { get; set; }

@@ -6,15 +6,15 @@ namespace ProjectManagement.DataAccess.Abstractions
 {
     public interface ITeacherRepository:IBaseRepository<Teacher>
     {
-        public Teacher AddDisciplineToTeacher(Guid teacherId, Discipline disciplineToAdd);
+        public Teacher AddDisciplineToTeacher(string teacherId, Discipline disciplineToAdd);
 
 
         public Discipline UpdateDiscipline(Discipline disciplineToUpdate);
 
-        public void RemoveDisciplineFromTeacher(Guid teacherId, Discipline discipline);
+        public void RemoveDisciplineFromTeacher(string teacherId, Discipline discipline);
 
 
-        public List<Discipline> GetDisciplinesOfTeacher(Guid teacherId);
+        public List<Discipline> GetDisciplinesOfTeacher(string teacherId);
 
 
         public Discipline GetDisciplineById(Guid disciplineId);
@@ -25,6 +25,7 @@ namespace ProjectManagement.DataAccess.Abstractions
 
         public void RemoveProject(Guid disciplineId, Project projectToRemove);
 
+
         public Project UpdateProject(Project projectToUpdate);
 
 
@@ -32,6 +33,7 @@ namespace ProjectManagement.DataAccess.Abstractions
 
 
         public List<Student> GetStudentsOfProject(Guid projectId);
+
 
         public List<Student> GetStudentsOfDiscipline(Guid disciplineId);
 

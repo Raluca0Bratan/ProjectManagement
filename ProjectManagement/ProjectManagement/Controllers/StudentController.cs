@@ -2,14 +2,15 @@
 using Microsoft.AspNetCore.Mvc;
 using ProjectManagement.DataAccess.Model;
 using ProjectManagement.Logic;
+using ProjectManagement.Logic.Interfaces;
 
 namespace ProjectManagement.Controllers
 {
     public class StudentController : Controller
     {
-        private readonly StudentService studentService;
+        private readonly IStudentService studentService;
 
-        public StudentController(StudentService studentService)
+        public StudentController(IStudentService studentService)
         {
             this.studentService = studentService;
         }
@@ -35,7 +36,7 @@ namespace ProjectManagement.Controllers
 
         [HttpPut]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Guid id, Student updatedStudent)
+        public IActionResult Edit(string id, Student updatedStudent)
         {
             if (id != updatedStudent.Id)
             {
@@ -59,7 +60,7 @@ namespace ProjectManagement.Controllers
 
         [HttpDelete]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(Guid id)
+        public IActionResult DeleteConfirmed(string id)
         {
             try
             {
@@ -72,7 +73,7 @@ namespace ProjectManagement.Controllers
             return RedirectToAction("Index");
         }
         [HttpGet]
-        public IActionResult Details(Guid id)
+        public IActionResult Details(string id)
         {
             var student = studentService.GetStudentById(id);
             if (student == null)

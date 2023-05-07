@@ -18,7 +18,7 @@ namespace ProjectManagement.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var teachers = teacherService.GetTeachers();
+            var teachers = teacherService.GetAll();
             return View(teachers);
         }
 
@@ -39,7 +39,7 @@ namespace ProjectManagement.Controllers
         {
             if (ModelState.IsValid)
             {
-                teacherService.UpdateTeacher(teacher);
+                teacherService.Update(teacher);
                 return RedirectToAction(nameof(Index));
             }
 
@@ -47,16 +47,17 @@ namespace ProjectManagement.Controllers
         }
 
         [HttpDelete]
-        public IActionResult DeleteConfirmed(Guid id)
+        public IActionResult DeleteConfirmed(string id)
         {
-            teacherService.RemoveTeacher(id);
+            var teacher = teacherService.FindByCondition(t=>t.Id == id).FirstOrDefault();
+            teacherService.RemoveTeacher(teacher);
             return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]
-        public IActionResult Details(Guid id)
+        public IActionResult Details(string id)
         {
-            var student = teacherService.GetTeacherById(id);
+            var student = teacherService.FindByCondition(t => t.Id == id).FirstOrDefault();
             if (student == null)
             {
                 return NotFound();
