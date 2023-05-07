@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Moq;
 using ProjectManagement.DataAccess.EF;
 using ProjectManagement.DataAccess.Model;
@@ -8,7 +9,7 @@ namespace ProjectManagement.Test
     [TestClass]
     public class StudentRepositoryTest
     {
-        private  Mock<DbContext> mockContext;
+        private  Mock<ProjectManagementContext> mockContext;
         private  Mock<DbSet<Student>> mockDbSet;
         private  StudentRepository repository;
 
@@ -16,7 +17,8 @@ namespace ProjectManagement.Test
         [TestInitialize]
         public void Initialize()
         {
-            mockContext = new();
+            var options = new DbContextOptions<ProjectManagementContext>();
+            mockContext = new Mock<ProjectManagementContext>(options);
             mockDbSet = new();
 
             mockContext.Setup(c => c.Set<Student>()).Returns(mockDbSet.Object);
@@ -24,11 +26,18 @@ namespace ProjectManagement.Test
         }
 
         [TestMethod] // Raluca
-        public void Add_ShouldAddEntityAndSaveChanges()
+        public void HavingAdd_ShouldAddEntityAndSaveChanges()
         {
             // Arrange
             var student = new Student { Id = "123", Name = "John" };
-            repository = new StudentRepository(mockContext.Object);
+            var mockDbSet = new Mock<DbSet<Student>>();
+            var mockEntityEntry = new Mock<EntityEntry<Student>>();
+
+            mockDbSet.Setup(d => d.Add(It.IsAny<Student>())).Returns(mockEntityEntry.Object);
+            mockEntityEntry.Setup(e => e.Entity).Returns(student);
+
+            mockContext.Setup(c => c.Set<Student>()).Returns(mockDbSet.Object);
+            mockContext.Setup(c => c.SaveChanges()).Returns(1);
             // Act
             var result = repository.Add(student);
 

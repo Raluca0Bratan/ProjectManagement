@@ -9,8 +9,8 @@ namespace ProjectManagement.DataAccess.EF
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
-        private readonly DbContext context;
-        public BaseRepository(DbContext context)
+        private readonly ProjectManagementContext context;
+        public BaseRepository(ProjectManagementContext context)
         {
             this.context = context;
         }

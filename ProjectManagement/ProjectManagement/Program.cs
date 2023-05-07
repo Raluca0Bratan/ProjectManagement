@@ -3,7 +3,7 @@ using ProjectManagement.DataAccess.Abstractions;
 using ProjectManagement.DataAccess.EF;
 using ProjectManagement.Logic;
 using Microsoft.AspNetCore.Identity;
-
+using ProjectManagement.Logic.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,7 +19,7 @@ builder.Services.AddDbContext<DbContext, ProjectManagementContext>(options =>
     options.UseSqlServer(connectionString));
 
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
-builder.Services.AddScoped<StudentService>();
+builder.Services.AddScoped<IStudentService,StudentService>();
 
 builder.Services.AddScoped<ITeacherRepository, TeacherRepository>();
 builder.Services.AddScoped<TeacherService>();

@@ -8,7 +8,7 @@ namespace ProjectManagement.DataAccess.EF
 {
     public class UserRepository : BaseRepository<User>, IUserRepository
     {
-        public UserRepository(DbContext context) : base(context)
+        public UserRepository(ProjectManagementContext context) : base(context)
         {
         }
     }

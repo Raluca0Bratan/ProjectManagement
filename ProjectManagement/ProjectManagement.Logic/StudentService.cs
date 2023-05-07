@@ -1,11 +1,11 @@
 ﻿using ProjectManagement.DataAccess.Abstractions;
 using ProjectManagement.DataAccess.Model;
-using System;
-using System.Collections.Generic;
+using ProjectManagement.Logic.Interfaces;
+
 
 namespace ProjectManagement.Logic
 {
-    public class StudentService
+    public class StudentService:IStudentService
     {
         private readonly IStudentRepository studentRepository;
         public StudentService(IStudentRepository studentRepository)

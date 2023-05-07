@@ -1,14 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjectManagement.DataAccess.Model;
 using ProjectManagement.Logic;
+using ProjectManagement.Logic.Interfaces;
 
 namespace ProjectManagement.Controllers
 {
     public class StudentController : Controller
     {
-        private readonly StudentService studentService;
+        private readonly IStudentService studentService;
 
-        public StudentController(StudentService studentService)
+        public StudentController(IStudentService studentService)
         {
             this.studentService = studentService;
         }

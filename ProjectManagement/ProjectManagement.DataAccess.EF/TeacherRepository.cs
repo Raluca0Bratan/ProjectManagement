@@ -8,8 +8,8 @@ namespace ProjectManagement.DataAccess.EF
 {
     public class TeacherRepository : BaseRepository<Teacher>, ITeacherRepository
     {
-        private readonly DbContext context;
-        public TeacherRepository(DbContext context) : base(context)
+        private readonly ProjectManagementContext context;
+        public TeacherRepository(ProjectManagementContext context) : base(context)
         {
         }
 

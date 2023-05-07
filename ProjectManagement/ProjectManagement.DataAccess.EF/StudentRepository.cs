@@ -9,8 +9,8 @@ namespace ProjectManagement.DataAccess.EF
 {
     public class StudentRepository : BaseRepository<Student>, IStudentRepository
     {
-        private readonly DbContext context; 
-        public StudentRepository(DbContext context) : base(context)
+        private readonly ProjectManagementContext context; 
+        public StudentRepository(ProjectManagementContext context) : base(context)
         {
         }
 

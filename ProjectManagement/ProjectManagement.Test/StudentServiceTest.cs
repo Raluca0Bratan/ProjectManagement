@@ -2,6 +2,7 @@
 using ProjectManagement.DataAccess.Abstractions;
 using ProjectManagement.DataAccess.Model;
 using ProjectManagement.Logic;
+using System.Linq.Expressions;
 
 namespace ProjectManagement.Test
 {
@@ -14,6 +15,7 @@ namespace ProjectManagement.Test
         [TestMethod]  // Raluca
         public void HavingGetStudents_WhenThereIsAListOfStudents_ShouldReturnAllStudents()
         {
+            studentService = new(mockRepository.Object);
             // Arrange
             var students = new List<Student>
         {
@@ -29,6 +31,38 @@ namespace ProjectManagement.Test
             // Assert
             Assert.AreEqual(students.Count, result.Count());
             CollectionAssert.AreEqual(students, result.ToList());
+        }
+
+        [TestMethod]
+        public void HavingAddStudent_ShouldCallRepositoryAdd()
+        {
+            // Arrange
+            var student = new Student { Id = "1", Name = "John" };
+
+            // Act
+            studentService.AddStudent(student);
+
+            // Assert
+            mockRepository.Verify(r => r.Add(student), Times.Once);
+            
+        }
+
+        [TestMethod]
+        public void HavingRemoveStudent_WithExistingStudentId_ShouldCallRepositoryRemove()
+        {
+            // Arrange
+            var studentId = "1";
+            var student = new Student { Id = studentId, Name = "John" };
+
+            mockRepository.Setup(r => r.FindByCondition(It.IsAny<Expression<Func<Student, bool>>>())).Returns(new List<Student> { student }.AsQueryable());
+
+            // Act
+            studentService.RemoveStudent(studentId);
+
+            // Assert
+            mockRepository.Verify(r => r.FindByCondition(It.IsAny<Expression<Func<Student, bool>>>()), Times.Once);
+            mockRepository.Verify(r => r.Remove(student), Times.Once);
+           
         }
     }
 }
