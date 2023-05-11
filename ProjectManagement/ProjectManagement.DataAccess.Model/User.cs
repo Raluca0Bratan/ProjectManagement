@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace ProjectManagement.DataAccess.Model
 {
-    public abstract class User:IdentityUser
+    public class User:IdentityUser
     {
         //public Guid Id { get; set; }    
         public string Name { get; set; }

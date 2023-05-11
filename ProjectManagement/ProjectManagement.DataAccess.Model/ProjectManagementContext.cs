@@ -6,7 +6,7 @@ using System.Data;
 
 namespace ProjectManagement.DataAccess.EF
 {
-    public class ProjectManagementContext: IdentityDbContext<IdentityUser>
+    public class ProjectManagementContext: IdentityDbContext<User>
     {
         public ProjectManagementContext(DbContextOptions<ProjectManagementContext> options)
             : base(options) { }  
