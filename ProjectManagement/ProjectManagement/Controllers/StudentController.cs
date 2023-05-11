@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProjectManagement.DataAccess.Model;
 using ProjectManagement.Logic;
@@ -7,6 +8,7 @@ using ProjectManagement.Models;
 
 namespace ProjectManagement.Controllers
 {
+    [Authorize(Roles = "Student")]
     public class StudentController : Controller
     {
         private readonly IStudentService studentService;

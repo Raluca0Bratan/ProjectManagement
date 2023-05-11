@@ -1,10 +1,13 @@
 ﻿
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProjectManagement.DataAccess.Model;
 using ProjectManagement.Logic;
+using System.Data;
 
 namespace ProjectManagement.Controllers
 {
+    [Authorize(Roles = "Teacher")]
     public class TeacherController : Controller
     {
         private readonly TeacherService teacherService;
