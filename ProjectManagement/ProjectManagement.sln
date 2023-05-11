@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectManagement.Logic", "
 		{A9741F78-917B-446C-8A58-91F2C79775E5} = {A9741F78-917B-446C-8A58-91F2C79775E5}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectManagement.Test", "ProjectManagement.Test\ProjectManagement.Test.csproj", "{AD5AFB3A-0B03-47A0-9C84-CA40BE72B5E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectManagement.Test", "ProjectManagement.Test\ProjectManagement.Test.csproj", "{AD5AFB3A-0B03-47A0-9C84-CA40BE72B5E8}"
 	ProjectSection(ProjectDependencies) = postProject
 		{00A163F4-BB9A-470E-A130-AB50F27ADBEB} = {00A163F4-BB9A-470E-A130-AB50F27ADBEB}
 		{408987D0-9C8A-49CD-8688-A816FEB2DCE2} = {408987D0-9C8A-49CD-8688-A816FEB2DCE2}

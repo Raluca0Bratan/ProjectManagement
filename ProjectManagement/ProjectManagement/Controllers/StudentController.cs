@@ -122,5 +122,26 @@ namespace ProjectManagement.Controllers
         {
             return View();
         }
+
+        public IActionResult StudentDisciplines()
+        {
+            // Get the current student's disciplines
+            var studentId = GetCurrentStudentId(); // Implement your own logic to retrieve the current student's ID
+            var studentDisciplines = studentService.GetDisciplinesOfStudent(studentId);
+
+            // Map the disciplines to a view model
+            var disciplineViewModels = studentDisciplines.Select(d => new DisciplineViewModel
+            {
+                Name = d.Name,
+                TeacherName = d.Teacher.Name,
+            }).ToList();
+
+            return View(disciplineViewModels);
+        }
+        private string GetCurrentStudentId()
+        {
+            // Example implementation: return the currently logged-in user's ID
+            return User.Identity.Name;
+        }
     }
 }
