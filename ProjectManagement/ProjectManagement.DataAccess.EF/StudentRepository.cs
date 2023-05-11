@@ -41,5 +41,34 @@ namespace ProjectManagement.DataAccess.EF
             return discipline.Questions;
         }
 
+        public Project AddProjectToStudent(Project project,string studentId)
+        {
+            var student = GetStudentById(studentId);
+            var studentProject = new StudentProject
+            {
+                Project = project,
+                StudentId = studentId,
+                Student = student,
+                ProjectId = project.Id,
+            };
+            student.StudentProjects.Add(studentProject);
+            this.context.Set<StudentProject>().Add(studentProject);
+            return project;
+        }
+
+        public Discipline AddDisciplineToStudent(Discipline discipline, string studentId)
+        {
+            var student = GetStudentById(studentId);
+            var studentDiscipline = new StudentDiscipline
+            {
+                Discipline = discipline,
+                StudentId = studentId,
+                Student = student,
+                DisciplineId = discipline.Id,
+            };
+            student.StudentDisciplines.Add(studentDiscipline);
+            this.context.Set<StudentDiscipline>().Add(studentDiscipline);
+            return discipline;
+        }
     }
 }

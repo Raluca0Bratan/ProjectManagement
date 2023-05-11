@@ -4,10 +4,11 @@ using ProjectManagement.DataAccess.EF;
 using ProjectManagement.Logic;
 using Microsoft.AspNetCore.Identity;
 using ProjectManagement.Logic.Interfaces;
+using ProjectManagement.DataAccess.Model;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var connectionString = builder.Configuration.GetConnectionString("MyConnection");
 
 
 // Add services to the container.
@@ -27,11 +28,15 @@ builder.Services.AddScoped<TeacherService>();
 builder.Services.AddScoped<IUserRepository,UserRepository>();
 builder.Services.AddScoped<UserService>();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<ProjectManagementContext>(); 
+//builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+//    .AddRoles<IdentityRole>()
+//    .AddEntityFrameworkStores<ProjectManagementContext>(); 
+builder.Services.AddIdentity<User,IdentityRole>()
+            .AddEntityFrameworkStores<ProjectManagementContext>()
+            .AddDefaultUI()
+            .AddDefaultTokenProviders();
 builder.Services.AddDbContext<ProjectManagementContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(connectionString,b => b.MigrationsAssembly("ProjectManagement")));
 builder.Services.Configure<IdentityOptions>(options =>
 {
     // Password settings

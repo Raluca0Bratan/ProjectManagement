@@ -13,6 +13,11 @@ namespace ProjectManagement.DataAccess.Abstractions
 
 
         public IEnumerable<Question> GetQuestionsOfDiscipline(Guid disciplineId);
-        
+
+        public Project AddProjectToStudent(Project project, string studentId);
+
+        public Discipline AddDisciplineToStudent(Discipline discipline, string studentId);
+
+       
     }
 }

@@ -5,7 +5,7 @@ using ProjectManagement.Logic.Interfaces;
 
 namespace ProjectManagement.Logic
 {
-    public class StudentService:IStudentService
+    public class StudentService : IStudentService
     {
         private readonly IStudentRepository studentRepository;
         public StudentService(IStudentRepository studentRepository)
@@ -20,11 +20,11 @@ namespace ProjectManagement.Logic
         public void AddStudent(Student student)
         {
             studentRepository.Add(student);
-            
+
         }
         public void RemoveStudent(string studentId)
         {
-            var student = studentRepository.FindByCondition(s=>s.Id==studentId).FirstOrDefault();
+            var student = studentRepository.FindByCondition(s => s.Id == studentId).FirstOrDefault();
             if (student != null)
             {
                 studentRepository.Remove(student);
@@ -48,20 +48,29 @@ namespace ProjectManagement.Logic
         }
         public void UpdateStudent(Student updatedStudent)
         {
-           studentRepository.Update(updatedStudent);    
+            studentRepository.Update(updatedStudent);
         }
 
         public List<Discipline> GetDisciplinesOfStudent(string studentId)
         {
-           return studentRepository.GetDisciplinesOfStudent(studentId);
+            return studentRepository.GetDisciplinesOfStudent(studentId);
         }
         public List<Project> GetProjectsOfStudentOfDiscipline(string studentId, Guid disciplineId)
         {
-          return studentRepository.GetProjectsOfStudentOfDiscipline(studentId, disciplineId);
+            return studentRepository.GetProjectsOfStudentOfDiscipline(studentId, disciplineId);
         }
         public IEnumerable<Question> GetQuestionsOfDiscipline(Guid disciplineId)
         {
             return studentRepository.GetQuestionsOfDiscipline(disciplineId);
+        }
+        public Project AddProjectToStudent(Project project, string studentId)
+        {
+            return studentRepository.AddProjectToStudent(project, studentId);
+        }
+
+        public Discipline AddDisciplineToStudent(Discipline discipline, string studentId)
+        {
+           return studentRepository.AddDisciplineToStudent(discipline, studentId);
         }
     }
 }
