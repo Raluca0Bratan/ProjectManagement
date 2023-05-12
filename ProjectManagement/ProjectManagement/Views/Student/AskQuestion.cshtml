@@ -1,0 +1,38 @@
+﻿@model ProjectManagement.ViewModels.QuestionsViewModel
+
+<h2>Questions</h2>
+
+@using (Html.BeginForm("CreateQuestion", "Project", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="QuestionText">Ask a question:</label>
+        <div class="col-md-10">
+            <textarea class="form-control" id="QuestionText" name="QuestionText" rows="3"></textarea>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="submit" class="btn btn-primary">Ask Question</button>
+        </div>
+    </div>
+}
+
+<h2>Questions</h2>
+
+@foreach (var question in Model.Questions)
+{
+    <div>
+        <strong>@question.QuestionText</strong>
+        @if (question.Answer != null)
+        {
+            <p>@question.Answer.AnswerText</p>
+        }
+        else
+        {
+            <p>No answer yet.</p>
+        }
+    </div>
+}

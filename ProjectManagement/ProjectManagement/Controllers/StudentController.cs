@@ -105,10 +105,6 @@ namespace ProjectManagement.Controllers
                     //Description = model.Description,
                     // Set other properties as needed
                 };
-           
-                // Add the project to the current student
-                var studentId = "your_current_student_id";
-                studentService.AddProjectToStudent(project,studentId);
 
                 // Redirect to a success page or a different action
                 return RedirectToAction("ProjectCreated");
