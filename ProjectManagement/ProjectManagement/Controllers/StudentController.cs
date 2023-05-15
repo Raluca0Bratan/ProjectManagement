@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ProjectManagement.DataAccess.Model;
 using ProjectManagement.Logic;
@@ -12,11 +13,12 @@ namespace ProjectManagement.Controllers
     public class StudentController : Controller
     {
         private readonly IStudentService studentService;
-        
+        private readonly UserManager<User> userManager;
 
-        public StudentController(IStudentService studentService)
+        public StudentController(IStudentService studentService, UserManager<User> userManager)
         {
             this.studentService = studentService;
+            this.userManager = userManager;
         }
 
         [HttpGet]
@@ -126,8 +128,8 @@ namespace ProjectManagement.Controllers
         public IActionResult StudentDisciplines()
         {
             // Get the current student's disciplines
-            var studentId = GetCurrentStudentId(); // Implement your own logic to retrieve the current student's ID
-            var studentDisciplines = studentService.GetDisciplinesOfStudent(studentId);
+            var student = userManager.GetUserAsync(User); // Implement your own logic to retrieve the current student's ID
+            var studentDisciplines = studentService.GetDisciplinesOfStudent(student.Id.ToString());
 
             // Map the disciplines to a view model
             var disciplineViewModels = studentDisciplines.Select(d => new DisciplineViewModel

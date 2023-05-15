@@ -1,5 +1,6 @@
 ﻿
 
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using ProjectManagement.Controllers;
@@ -17,6 +18,7 @@ namespace ProjectManagement.Test
         {
             // Arrange
             var mockStudentService = new Mock<IStudentService>();
+            var mockUserManager = new Mock<UserManager<User>>();
             var students = new List<Student>
     {
         new Student { Id = "1", Name = "John" },
@@ -24,7 +26,7 @@ namespace ProjectManagement.Test
     };
             mockStudentService.Setup(s => s.GetStudents()).Returns(students);
 
-            var controller = new StudentController(mockStudentService.Object);
+            var controller = new StudentController(mockStudentService.Object,mockUserManager.Object);
 
             // Act
             var result = controller.Index() as ViewResult;

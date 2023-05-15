@@ -2,10 +2,10 @@
 
 #nullable disable
 
-namespace ProjectManagement.Migrations
+namespace ProjectManagement.DataAccess.Model.Migrations
 {
     /// <inheritdoc />
-    public partial class ConfigureIdentity : Migration
+    public partial class NewMigr : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
