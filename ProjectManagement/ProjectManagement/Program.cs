@@ -19,18 +19,9 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<DbContext, ProjectManagementContext>(options =>
     options.UseSqlServer(connectionString));
 
-builder.Services.AddScoped<IStudentRepository, StudentRepository>();
-builder.Services.AddScoped<IStudentService,StudentService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService,UserService>();
 
-builder.Services.AddScoped<ITeacherRepository, TeacherRepository>();
-builder.Services.AddScoped<TeacherService>();
-
-builder.Services.AddScoped<IUserRepository,UserRepository>();
-builder.Services.AddScoped<UserService>();
-
-//builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-//    .AddRoles<IdentityRole>()
-//    .AddEntityFrameworkStores<ProjectManagementContext>(); 
 builder.Services.AddIdentity<User,IdentityRole>()
             .AddEntityFrameworkStores<ProjectManagementContext>()
             .AddDefaultUI()

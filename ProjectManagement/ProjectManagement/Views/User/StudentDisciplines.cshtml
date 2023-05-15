@@ -1,9 +1,10 @@
-﻿@*
+﻿@using ProjectManagement.DataAccess.Model;
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
 }
-@model List<DisciplineViewModel>
+@model List<Discipline>
 
 <h1>Student Disciplines</h1>
 
@@ -13,7 +14,7 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">@discipline.Name</h5>
-                <h6 class="card-subtitle">@discipline.TeacherName</h6>
+                <h6 class="card-subtitle">@discipline.Teacher.Name</h6>
             </div>
         </div>
     }

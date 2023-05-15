@@ -1,19 +1,20 @@
 ﻿
 
 using ProjectManagement.DataAccess.Model;
+using System.Linq.Expressions;
 
-namespace ProjectManagement.DataAccess.Abstractions
+namespace ProjectManagement.Logic.Interfaces
 {
-    public interface IUserRepository:IBaseRepository<User>
+    public interface IUserService
     {
-
         public User GetById(string userId);
-        
+
         public List<Discipline> GetDisciplinesOfStudent(string studentId);
 
         public List<Project> GetProjectsOfStudentOfDiscipline(string studentId, Guid disciplineId);
 
         public IEnumerable<Question> GetQuestionsOfDiscipline(Guid disciplineId);
+
 
         public Project AddProjectToStudent(Project project, string studentId);
 
@@ -21,7 +22,7 @@ namespace ProjectManagement.DataAccess.Abstractions
         public Discipline AddDisciplineToStudent(Discipline discipline, string studentId);
 
 
-        public User AddDisciplineToTeacher(string teacherId, Discipline disciplineToAdd);
+        public Discipline AddDisciplineToTeacher(string teacherId, Discipline disciplineToAdd);
 
 
         public Discipline UpdateDiscipline(Discipline disciplineToUpdate);
@@ -57,6 +58,12 @@ namespace ProjectManagement.DataAccess.Abstractions
 
 
         public IEnumerable<Project> GetProjectsOfDiscipline(Guid disciplineId);
-        
+
+        public IEnumerable<User> GetAll();
+        User Add(User entity);
+        User Update(User entity);
+        void Remove(User entity);
+        public IQueryable<User> FindByCondition(Expression<Func<User, bool>> expression);
+
     }
 }

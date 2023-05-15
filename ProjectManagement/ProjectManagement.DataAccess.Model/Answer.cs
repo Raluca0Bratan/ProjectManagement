@@ -7,7 +7,7 @@
 
         public string TeacherId { get; set; } 
 
-        public Teacher Teacher { get; set; }
+        public User Teacher { get; set; }
 
         public Guid QuestionId { get; set; }
 

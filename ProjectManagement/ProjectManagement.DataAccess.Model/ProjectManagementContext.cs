@@ -11,14 +11,14 @@ namespace ProjectManagement.DataAccess.EF
         public ProjectManagementContext(DbContextOptions<ProjectManagementContext> options)
             : base(options) { }  
 
-        DbSet<Administrator> Administrators { get; set; }   
+        //DbSet<Administrator> Administrators { get; set; }   
         DbSet<Answer> Answers { get; set; }
 
         DbSet<Project> Projects { get; set; }
 
-        DbSet<Student> Students { get; set; }
+       // DbSet<Student> Students { get; set; }
         
-        DbSet<Teacher> Teachers { get; set; }   
+        DbSet<User> Teachers { get; set; }   
 
         DbSet<Discipline> Disciplines { get; set; }
 

@@ -10,7 +10,7 @@ namespace ProjectManagement.DataAccess.Model
 
         public string TeacherId { get; set; } 
 
-        public Teacher Teacher { get; set;}
+        public User Teacher { get; set;}
 
         public ICollection<StudentDiscipline>? StudentDisciplines { get; set; }
 
