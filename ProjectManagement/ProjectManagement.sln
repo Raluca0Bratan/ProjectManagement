@@ -34,6 +34,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectManagement.Test", "P
 		{B778FFA9-62F6-4D08-868E-79C211D89579} = {B778FFA9-62F6-4D08-868E-79C211D89579}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectManagement.AutomatedTests", "ProjectManagement.AutomatedTests\ProjectManagement.AutomatedTests.csproj", "{357112EC-2CB4-48B9-B95F-5A645923B3C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +66,10 @@ Global
 		{AD5AFB3A-0B03-47A0-9C84-CA40BE72B5E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD5AFB3A-0B03-47A0-9C84-CA40BE72B5E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD5AFB3A-0B03-47A0-9C84-CA40BE72B5E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{357112EC-2CB4-48B9-B95F-5A645923B3C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{357112EC-2CB4-48B9-B95F-5A645923B3C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{357112EC-2CB4-48B9-B95F-5A645923B3C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{357112EC-2CB4-48B9-B95F-5A645923B3C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ProjectManagement.DataAccess.Model;
 using ProjectManagement.Logic.Interfaces;
+using ProjectManagement.Models;
 using System.Security.Claims;
 
 namespace ProjectManagement.Controllers
@@ -34,6 +35,16 @@ namespace ProjectManagement.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var disciplines = userService.GetDisciplinesOfStudent(userId);
            return View(disciplines);
+        }
+
+
+        [Authorize(Roles = "Teacher")]
+        [HttpGet]
+        public async Task<IActionResult> CreateDiscipline(Discipline discipline)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var disciplines = userService.AddDisciplineToTeacher(userId,discipline);
+            return View(disciplines);
         }
 
         //[HttpPost]
